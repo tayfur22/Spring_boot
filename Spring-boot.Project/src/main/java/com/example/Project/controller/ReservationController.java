@@ -3,9 +3,10 @@ package com.example.Project.controller;
 import com.example.Project.entity.Reservation;
 import com.example.Project.entity.enums.ReservationStatus;
 import com.example.Project.service.ReservationService;
+import com.example.Project.service.impl.ReservationServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -24,28 +25,25 @@ public class ReservationController {
     }
 
     @GetMapping("/within-date-range")
-    public List<Reservation> getReservationsWithinDateRange(@RequestParam LocalDate strat, @RequestParam LocalDate end) {
-        return reservationService.getReservationsWithinDateRange(strat, end);
+    public ResponseEntity<List<Reservation>> getReservationsWithinDateRange(@RequestParam LocalDate strat, @RequestParam LocalDate end) {
+        return ResponseEntity.ok(reservationService.getReservationsWithinDateRange(strat, end));
     }
 
     @PostMapping
-    public Reservation createReservation(@Valid @RequestBody Reservation reservation) {
-        return (Reservation) reservationService.save(reservation);
+    public ResponseEntity<Reservation> createReservation(@Valid @RequestBody Reservation reservation) {
+        return ResponseEntity.ok((Reservation) reservationService.save(reservation));
     }
 
     @GetMapping
-    public List<Reservation> getAllReservations() {
-        return reservationService.getAll();
+    public ResponseEntity<List<Reservation>> getAllReservations() {
+        return ResponseEntity.ok(reservationService.getAll());
     }
 
-    @PostMapping
-    public Reservation create(@Valid @RequestBody Reservation reservation) {
-        return (Reservation) reservationService.save(reservation);
-    }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         reservationService.deleteById(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
@@ -54,7 +52,7 @@ public class ReservationController {
     }
 
     @GetMapping("/reservations")
-    public List<Reservation> findReservationsByStatus(@RequestParam ReservationStatus status) {
-        return reservationService.findReservationsByStatus(status);
+    public ResponseEntity<List<Reservation>> findReservationsByStatus(@RequestParam ReservationStatus status) {
+        return ResponseEntity.ok(reservationService.findReservationsByStatus(status));
     }
 }

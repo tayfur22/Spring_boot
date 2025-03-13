@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface WorkspaceRepository extends BaseRepository<Workspace, Long> {
     List<Workspace> findByAvailableTrue();
-
     List<Workspace> findByWorkspaceType(WorkspaceType type);
 }

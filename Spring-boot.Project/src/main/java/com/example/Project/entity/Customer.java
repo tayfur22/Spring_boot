@@ -1,5 +1,6 @@
 package com.example.Project.entity;
 
+import com.example.Project.annotation.ValidEmail;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
@@ -10,8 +11,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
@@ -23,6 +23,7 @@ public class Customer {
     @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
     private String name;
 
-    @Email
+    @NotBlank
+    @ValidEmail
     private String email;
 }
