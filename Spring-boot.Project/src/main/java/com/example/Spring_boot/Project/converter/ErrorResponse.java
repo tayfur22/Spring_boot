@@ -1,4 +1,4 @@
-package com.example.Spring_boot.Project.exception;
+package com.example.Spring_boot.Project.converter;
 
 public class ErrorResponse {
     private String message;
