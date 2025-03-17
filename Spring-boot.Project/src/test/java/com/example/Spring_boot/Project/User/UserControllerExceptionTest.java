@@ -1,9 +1,8 @@
-package com.example.Spring_boot.Project;
+package com.example.Spring_boot.Project.User;
 
 import com.example.Spring_boot.Project.Controller.UserController;
 import com.example.Spring_boot.Project.Entity.User;
 import com.example.Spring_boot.Project.Service.UserService;
-import com.example.Spring_boot.Project.exception.DuplicateEmailException;
 import com.example.Spring_boot.Project.exception.UserNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -43,7 +41,7 @@ public class UserControllerExceptionTest {
 
     @Test
     public void testGetUserById_notFound() throws Exception {
-        // İstifadəçi tapılmadıqda istisna atırıq
+
         Mockito.when(userService.getUserById(1L)).thenThrow(new UserNotFoundException("User not found with id 1"));
 
         mockMvc.perform(get("/users/1"))
@@ -53,7 +51,7 @@ public class UserControllerExceptionTest {
 
     @Test
     public void testCreateUser_duplicateEmail() throws Exception {
-        // Eyni email mövcud olduqda DuplicateEmailException atırıq
+
         Mockito.when(userService.existsByEmail("tayfur@example.com")).thenReturn(true);
 
         mockMvc.perform(post("/users")

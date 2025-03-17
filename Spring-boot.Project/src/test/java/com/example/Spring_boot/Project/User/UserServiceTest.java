@@ -1,4 +1,4 @@
-package com.example.Spring_boot.Project;
+package com.example.Spring_boot.Project.User;
 
 import com.example.Spring_boot.Project.Entity.User;
 import com.example.Spring_boot.Project.Repository.UserRepository;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;

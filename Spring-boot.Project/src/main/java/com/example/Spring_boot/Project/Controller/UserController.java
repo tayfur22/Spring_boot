@@ -3,7 +3,7 @@ package com.example.Spring_boot.Project.Controller;
 import com.example.Spring_boot.Project.Entity.User;
 import com.example.Spring_boot.Project.Service.UserService;
 import com.example.Spring_boot.Project.exception.DuplicateEmailException;
-import com.example.Spring_boot.Project.exception.ErrorResponse;
+import com.example.Spring_boot.Project.converter.ErrorResponse;
 import com.example.Spring_boot.Project.exception.UserNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -66,6 +65,7 @@ public class UserController {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException ex) {
+
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(ex.getMessage()));
     }
 }
